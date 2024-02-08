@@ -27,14 +27,16 @@ route::get('/register', function(){
 });
 
 route::get('/admin', function(){
-    return view('admin/admin')->with([Controller::class, 'get_times']);
+    return view('admin/admin');
 });
 
 route::get('/admin/times', function(){
     return view('admin/form/times');
 });
 
-route::get('/admin/games', [Controller::class, 'get_games']);
+route::get('/admin/games', function(){
+    return view('admin/form/games', [Controller::class, 'get_games']);
+});
 
 route::get('/admin/counts', function(){
     return view('admin/form/counts');

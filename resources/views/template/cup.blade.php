@@ -28,17 +28,12 @@
             });
         })
         .catch(function (error) {
-            // Manipule erros, se houver
             console.error('Erro ao consumir a API:', error);
         });
 
-        // Faça uma solicitação GET para a API para obter os times
-    axios.get('http://localhost:8000/api/games')
+        axios.get('http://localhost:8000/api/games')
         .then(function (response) {
-            // Manipule a resposta da API
-            console.log(response.data);
 
-            // Preencha a tabela com os dados recebidos
             var games = response.data;
 
             var tableBody = document.getElementById('games-table-body');
@@ -60,17 +55,17 @@
 </script>
 
 <div class="clas">
-    <h1 class="title-clas">CLASSIFICAÇÃO DOS TIMES</h1>
     <table class="table-clas">
+        <h1 class="title-clas">CLASSIFICAÇÃO DOS TIMES</h1>
         <thead>
             <tr>
                 <td>Posição</td>
                 <td>Time</td>
-                <td>Pontos</td>
-                <td>Jogos</td>
-                <td>Vitórias</td>
-                <td>Empates</td>
-                <td>Derrotas</td>
+                <td>Pts</td>
+                <td>PJ</td>
+                <td>V</td>
+                <td>E</td>
+                <td>D</td>
             </tr>
         </thead>
         <tbody id="times-table-body">

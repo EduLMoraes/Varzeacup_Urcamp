@@ -59,6 +59,7 @@ Route::get('/games', function(){
                 'home_gols' => $games[$i] -> home_gols,
                 'visitor' => $games[$i] -> visitor,
                 'visitor_gols' => $games[$i] -> visitor_gols,
+                'desc' => $games[$i] -> desc,
             ]
         ;
     }

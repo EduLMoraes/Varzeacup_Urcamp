@@ -6,7 +6,7 @@ form{
     min-width: 250px;
     display: grid;    
     margin: auto;
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
 label, .button-submit{
@@ -54,10 +54,4 @@ input{
 
 .del{
     background-color: red;
-}
-
-.check{
-    display: flex;
-    justify-content: baseline;
-    margin-top: 20px;
 }
