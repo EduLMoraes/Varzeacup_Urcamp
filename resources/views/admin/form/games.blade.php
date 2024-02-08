@@ -61,17 +61,17 @@
                 </select>
                 
                 <label>Casa:</label>
-                <input type="text" name="" id="">
+                <input type="text" name="" id="" required>
                 
                 <label></label>
                 Gols da Casa:
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
                 
                 <label>Visitante:</label>
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
                 
                 <label>Gols do visitante:</label>
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
 
                 <div class="submits">
                     <button type="submit" class="button-submit del">Deletar</button>

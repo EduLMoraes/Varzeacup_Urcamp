@@ -24,13 +24,13 @@
 
             <form action="post">
                 Time:
-                <input type="text" name="" id="">
+                <input type="text" name="" id="" required>
                 Vitórias:
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
                 Empates:
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
                 Derrotas:
-                <input type="number" name="" id="">
+                <input type="number" name="" id="" required>
 
                 <div class="submits">
                     <button type="submit" class="button-submit del">Deletar</button>
