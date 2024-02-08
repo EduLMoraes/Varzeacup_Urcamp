@@ -23,76 +23,79 @@
                 document.getElementById('e-button-submit').hidden = true;
                 document.getElementById('r-button-submit').hidden = true;
 
-            var email;
-            var username;
-            var password;
-            var cpassword;
+                var email;
+                var username;
+                var password;
+                var cpassword;
 
-            function validEmail(email) {
-                var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
-            }
-
-            function validName(name) {
-                return name.length > 4;
-            }
-
-            function validPass(pass, cpass) {
-                return pass == cpass;
-            }
-
-            function emailComplet() {
-                email = document.getElementById('email').value;
-
-                if (validEmail(email)){
-                    document.getElementById('name').hidden = false;
-                    document.getElementById('l-name').hidden = false;
-                }else{
-                    document.getElementById('name').hidden = true;
+                function validEmail(email) {
+                    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
                 }
-            }
 
-            function nameComplet() {
-                name = document.getElementById('name').value;
-
-                if (validName(name)){
-                    document.getElementById('pass').hidden = false;
-                    document.getElementById('l-pass').hidden = false;
-                }else{
-                    document.getElementById('pass').hidden = true;
+                function validName(name) {
+                    return name.length > 4;
                 }
-            }
 
-            function passComplet() {
-                pass = document.getElementById('pass').value;
-
-                if (pass.length >= 6){
-                    document.getElementById('cpass').hidden = false;
-                    document.getElementById('l-cpass').hidden = false;
-                }else{
-                    document.getElementById('cpass').hidden = true;
+                function validPass(pass, cpass) {
+                    return pass == cpass;
                 }
-            }
 
-            function cpassComplet() {
-                cpass = document.getElementById('cpass').value;
+                function emailComplet() {
+                    email = document.getElementById('email').value;
 
-                if (validPass(pass, cpass)){
-                    document.getElementById('d-button-submit').hidden = false;
-                    document.getElementById('e-button-submit').hidden = false;
-                    document.getElementById('r-button-submit').hidden = false;
-                }else{
-                    document.getElementById('d-button-submit').hidden = true;
-                    document.getElementById('e-button-submit').hidden = true;
-                    document.getElementById('r-button-submit').hidden = true;
+                    if (validEmail(email)){
+                        document.getElementById('name').hidden = false;
+                        document.getElementById('l-name').hidden = false;
+                    }else{
+                        document.getElementById('name').hidden = true;
+                        document.getElementById('l-name').hidden = true;
+                    }
                 }
-            }
 
-            document.getElementById("email").addEventListener("input", emailComplet);
-            document.getElementById("name").addEventListener("input", nameComplet);
-            document.getElementById("pass").addEventListener("input", passComplet);
-            document.getElementById("cpass").addEventListener("input", cpassComplet);
-        });
+                function nameComplet() {
+                    name = document.getElementById('name').value;
+
+                    if (validName(name)){
+                        document.getElementById('pass').hidden = false;
+                        document.getElementById('l-pass').hidden = false;
+                    }else{
+                        document.getElementById('pass').hidden = true;
+                        document.getElementById('l-pass').hidden = true;
+                    }
+                }
+
+                function passComplet() {
+                    pass = document.getElementById('pass').value;
+
+                    if (pass.length >= 6){
+                        document.getElementById('cpass').hidden = false;
+                        document.getElementById('l-cpass').hidden = false;
+                    }else{
+                        document.getElementById('cpass').hidden = true;
+                        document.getElementById('l-cpass').hidden = true;
+                    }
+                }
+
+                function cpassComplet() {
+                    cpass = document.getElementById('cpass').value;
+
+                    if (validPass(pass, cpass)){
+                        document.getElementById('d-button-submit').hidden = false;
+                        document.getElementById('e-button-submit').hidden = false;
+                        document.getElementById('r-button-submit').hidden = false;
+                    }else{
+                        document.getElementById('d-button-submit').hidden = true;
+                        document.getElementById('e-button-submit').hidden = true;
+                        document.getElementById('r-button-submit').hidden = true;
+                    }
+                }
+
+                document.getElementById("email").addEventListener("input", emailComplet);
+                document.getElementById("name").addEventListener("input", nameComplet);
+                document.getElementById("pass").addEventListener("input", passComplet);
+                document.getElementById("cpass").addEventListener("input", cpassComplet);
+            });
         </script>
 
     </head>
