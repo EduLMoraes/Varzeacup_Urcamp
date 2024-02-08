@@ -1,0 +1,63 @@
+@import './variables.css';
+
+
+form{
+    max-width: 250px;
+    min-width: 250px;
+    display: grid;    
+    margin: auto;
+    margin-top: 20vh;
+}
+
+label, .button-submit{
+    color: white;
+    margin-top: 20px;
+}
+
+input{
+    background-color: transparent;
+    border-color: var(--secound-color);
+    max-width: 250px;
+    border-radius: 10px;
+    font-family: var(--font-family-title);
+    min-height: 3vh;
+}
+
+.container{
+    display: block;
+    justify-content: center;
+    color: white;
+}
+
+.redirect{
+    font-size: smaller;
+    font-family: var(--font-family-common);
+    color: white;
+}
+
+.button-submit{
+    max-width: min-content;
+    font-size: large;
+    background-color: var(--third-color);
+    color: wheat;
+    margin-left: auto;
+}
+
+.submits{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cad{
+    background-color: green;
+}
+
+.del{
+    background-color: red;
+}
+
+.check{
+    display: flex;
+    justify-content: baseline;
+    margin-top: 20px;
+}

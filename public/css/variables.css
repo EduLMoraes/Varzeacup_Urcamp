@@ -1,0 +1,8 @@
+:root{
+    --principal-color: #333;
+    --secound-color: #fa3;
+    --third-color: #002;
+    --nav-bar-color: rgba(0, 0, 0, 0.74);
+    --font-family-title: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    --font-family-common: Georgia, 'Times New Roman', Times, serif;
+}

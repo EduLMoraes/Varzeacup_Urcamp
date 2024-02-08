@@ -1,0 +1,26 @@
+@import './variables.css';
+
+
+.navbar-adm{
+    background-color: var(--nav-bar-color);
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    justify-content: space-around;
+    color: var(--secound-color);
+}
+
+a{
+    color: var(--secound-color);
+}
+
+.group{
+    row-gap: row;
+    border-top: 1px solid var(--secound-color);
+    text-align: center;
+    max-height: fit-content;
+}
+
+.container{
+    background-color: var(--principal-color);
+}

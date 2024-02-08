@@ -1,0 +1,21 @@
+@import './variables.css';
+
+
+.nav-bar{
+    background-color: var(--third-color);
+
+}
+
+.auth-buttons{
+    display: flex;
+    margin-left: auto;
+    max-width: min-content;
+}
+
+.button-auth{
+    background-color: transparent;
+    color: #fff;
+    font-family: var(--font-family-common);
+    border: 0;
+    font-size: larger;
+}
