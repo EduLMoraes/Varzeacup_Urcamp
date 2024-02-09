@@ -41,3 +41,8 @@ route::get('/admin/games', function(){
 route::get('/admin/counts', function(){
     return view('admin/form/counts');
 });
+
+route::get('/time', function(){
+    return [TimeController::class, 'index'];
+});
+

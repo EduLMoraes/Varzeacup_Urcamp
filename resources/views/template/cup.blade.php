@@ -2,27 +2,24 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <script>
-    // Faça uma solicitação GET para a API para obter os times
     axios.get('http://localhost:8000/api/times')
         .then(function (response) {
-            // Manipule a resposta da API
-            console.log(response.data);
-
-            // Preencha a tabela com os dados recebidos
             var times = response.data;
-
+            console.log(times)
             var tableBody = document.getElementById('times-table-body');
 
+            var i = 0;
             times.forEach(function (time) {
+                i++;
                 var row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${time.id}</td>
-                    <td>${time.name}</td>
-                    <td>${time.points}</td>
-                    <td>${time.games}</td>
-                    <td>${time.victorys}</td>
-                    <td>${time.draws}</td>
-                    <td>${time.loses}</td>
+                    <td>${i}</td>
+                    <td>${time.name_time}</td>
+                    <td>${time.points_time}</td>
+                    <td>${time.games_time}</td>
+                    <td>${time.victory_time}</td>
+                    <td>${time.draw_time}</td>
+                    <td>${time.lost_time}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -31,7 +28,7 @@
             console.error('Erro ao consumir a API:', error);
         });
 
-        axios.get('http://localhost:8000/api/games')
+    axios.get('http://localhost:8000/api/games')
         .then(function (response) {
 
             var games = response.data;

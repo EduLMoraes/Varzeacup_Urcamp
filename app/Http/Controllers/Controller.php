@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Models\Time;
+use App\Models\User;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Psy\Readline\Hoa\Console;
 
 class Controller extends BaseController
 {
@@ -54,4 +54,5 @@ class Controller extends BaseController
         return $times;
 
     }
+
 }
