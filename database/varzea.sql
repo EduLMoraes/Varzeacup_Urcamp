@@ -9,22 +9,25 @@ CREATE TABLE IF NOT EXISTS users(
     password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS times(
-    id_time BIGSERIAL NOT NULL PRIMARY KEY,
-    points_time INT NOT NULL,
-    games_time INT NOT NULL,
-    name_time VARCHAR(100) NOT NULL,
-    victory_time INT NOT NULL,
-    draw_time INT NOT NULL,
-    lost_time INT NOT NULL
+CREATE TABLE IF NOT EXISTS teams(
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    points_team INT NOT NULL,
+    games_team INT NOT NULL,
+    name_team VARCHAR(100) NOT NULL,
+    victory_team INT NOT NULL,
+    draw_team INT NOT NULL,
+    lost_team INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS games(
-    id_game BIGSERIAL NOT NULL PRIMARY KEY,
+    id BIGSERIAL NOT NULL PRIMARY KEY,
     id_home BIGINT NOT NULL,
     id_visitor BIGINT NOT NULL,
     home_gols INT NOT NULL,
     visitor_gols INT NOT NULL,
-    FOREIGN KEY (id_home) REFERENCES times,
-    FOREIGN KEY (id_visitor) REFERENCES times
+    date DATE NOT NULL,
+    group_name VARCHAR(100) NOT NULL,
+    hour TIME NOT NULL,
+    FOREIGN KEY (id_home) REFERENCES teams(id),
+    FOREIGN KEY (id_visitor) REFERENCES teams(id)
 );

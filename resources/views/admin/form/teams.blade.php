@@ -3,16 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ACMA - Gerenciamento de times</title>
+        <title>ACMA - Gerenciamento de teams</title>
         <link rel="stylesheet" href="{{ asset('css/global.css') }}">
         <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <script>
-            async function getTimes() {
+            async function getTeams() {
                 try {
-                    const response = await axios.get('http://localhost:8000/api/times');
+                    const response = await axios.get('http://localhost:8000/api/teams');
                     return response.data;
                 } catch (error) {
                     console.error('Erro ao consumir a API:', error);
@@ -34,11 +34,11 @@
                 document.getElementById('e-submit').hidden = true;
                 document.getElementById('r-submit').hidden = true;
 
-                var time;
+                var team;
                 var vit;
                 var emp;
                 var der;
-                var times = await getTimes();
+                var teams = await getTeams();
                 var allComplete = false;
 
                 var has_time = false;
@@ -46,23 +46,70 @@
                 
 
                 function timeComplet() {
-                    time = document.getElementById('time').value;
+                    team = document.getElementById('team').value;
 
-                    for (var i = 0; i < times.length; i++) {
-                        if (time == times[i].name) { 
+                    for (var i = 0; i < teams.length; i++) {
+                        if (team === teams[i].name_team) { 
                             has_time = true;
+                            allComplete = true;
+
+                            hasTime();
+                            document.getElementById('vit').value = teams[i].victory_team;
+                            document.getElementById('emp').value = teams[i].draw_team;
+                            document.getElementById('der').value = teams[i].lost_team;
+
+                            document.getElementById('vit').hidden = false;
+                            document.getElementById('emp').hidden = false;
+                            document.getElementById('der').hidden = false;
+
+                            document.getElementById('l-vit').hidden = false;
+                            document.getElementById('l-emp').hidden = false;
+                            document.getElementById('l-der').hidden = false;
+
                             break;
                         }
-                        else { has_time = false } 
+                        else { 
+                            has_time = false;
+                            allComplete = false;
+                            document.getElementById('vit').value = 0;
+                            document.getElementById('emp').value = 0;
+                            document.getElementById('der').value = 0;
+
+                            document.getElementById('vit').hidden = true;
+                            document.getElementById('emp').hidden = true;
+                            document.getElementById('der').hidden = true;
+
+                            document.getElementById('l-vit').hidden = true;
+                            document.getElementById('l-emp').hidden = true;
+                            document.getElementById('l-der').hidden = true;
+
+                            document.getElementById('d-submit').hidden = true;
+                            document.getElementById('e-submit').hidden = true;
+                            document.getElementById('r-submit').hidden = true;
+                        } 
                     }
                     
-                    if (time.length > 3 && /^[a-zA-Z]+$/.test(time)){
+                    if (team.length > 3 && /^[a-zA-Z]+$/.test(team)){
+
                         hasTime();
                         document.getElementById('vit').hidden = false;
                         document.getElementById('l-vit').hidden = false;
                     }else{
+                        document.getElementById('vit').value = 0;
+                        document.getElementById('emp').value = 0;
+                        document.getElementById('der').value = 0;
+
                         document.getElementById('vit').hidden = true;
+                        document.getElementById('emp').hidden = true;
+                        document.getElementById('der').hidden = true;
+
                         document.getElementById('l-vit').hidden = true;
+                        document.getElementById('l-emp').hidden = true;
+                        document.getElementById('l-der').hidden = true;
+
+                        document.getElementById('d-submit').hidden = true;
+                        document.getElementById('e-submit').hidden = true;
+                        document.getElementById('r-submit').hidden = true;
                     }
                 }
 
@@ -119,11 +166,10 @@
                     }
                 }
 
-                document.getElementById("time").addEventListener("input", timeComplet);
+                document.getElementById("team").addEventListener("input", timeComplet);
                 document.getElementById("vit").addEventListener("input", vitComplet);
                 document.getElementById("emp").addEventListener("input", empComplet);
                 document.getElementById("der").addEventListener("input", derComplet);
-                document.getElementById("select-game").addEventListener("input", selectedGame);
             });
         </script>
     </head>
@@ -133,18 +179,13 @@
         <div class="container">
 
 
-            <div class="navbar-adm">
-                    <a href="/admin">Início</a>
-                    <a href="/admin/times">Times</a>
-                    <a href="/admin/games">Partidas</a>
-                    <a href="/admin/counts">Contas</a>
-                    <a href="/">Sair</a>
-            </div>
+            @include('admin/navbar')
+
 
             <form action="post">
                 
-                <label id="l-time">Time:</label>
-                <input type="text"  id="time" required>
+                <label id="l-team">Time:</label>
+                <input type="text"  id="team" required>
                 
                 <label id="l-vit">Vitórias:</label>
                 <input type="number"  id="vit" required>

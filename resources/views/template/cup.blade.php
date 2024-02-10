@@ -2,24 +2,24 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <script>
-    axios.get('http://localhost:8000/api/times')
+    axios.get('http://localhost:8000/api/teams')
         .then(function (response) {
-            var times = response.data;
-            console.log(times)
-            var tableBody = document.getElementById('times-table-body');
+            var teams = response.data;
+            console.log(teams)
+            var tableBody = document.getElementById('teams-table-body');
 
             var i = 0;
-            times.forEach(function (time) {
+            teams.forEach(function (time) {
                 i++;
                 var row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${i}</td>
-                    <td>${time.name_time}</td>
-                    <td>${time.points_time}</td>
-                    <td>${time.games_time}</td>
-                    <td>${time.victory_time}</td>
-                    <td>${time.draw_time}</td>
-                    <td>${time.lost_time}</td>
+                    <td>${time.name_team}</td>
+                    <td>${time.points_team}</td>
+                    <td>${time.games_team}</td>
+                    <td>${time.victory_team}</td>
+                    <td>${time.draw_team}</td>
+                    <td>${time.lost_team}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -38,9 +38,17 @@
             games.forEach(function (game) {
                 var row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${game.home}</td>
-                    <td>${game.home_gols}X${game.visitor_gols}</td>
-                    <td>${game.visitor}</td>
+                    <td>
+                        ${game.date} às ${game.hour}
+                        
+                    </td>
+                    <td>${game.id_home}</td>
+                    <td>
+                        ${game.group_name}
+                        <br>
+                        ${game.home_gols}X${game.visitor_gols}
+                    </td>
+                    <td>${game.id_visitor}</td>
                 `;
                 tableBody.appendChild(row);
             });
@@ -65,7 +73,7 @@
                 <td>D</td>
             </tr>
         </thead>
-        <tbody id="times-table-body">
+        <tbody id="teams-table-body">
         </tbody>
     </table>
 
@@ -73,8 +81,9 @@
     <table class="table-part">
         <thead>
             <tr>
+                <td class="datetime">Data e Horário</td>
                 <td class="time">Casa</td>
-                <td class="result">X</td>
+                <td class="result">Rodada<br>X</td>
                 <td class="time">Visitante</td>
             </tr>
         </thead>

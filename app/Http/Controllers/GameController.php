@@ -12,7 +12,16 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
+        $games = Game::orderBy('date', 'desc')->get();
+
+        foreach ($games as $game) {
+            $homeTeam = \App\Models\Team::find($game->id_home)->name_team;
+            $visitorTeam = \App\Models\Team::find($game->id_visitor)->name_team;
+            $game->id_home = $homeTeam;
+            $game->id_visitor = $visitorTeam;
+        }
+
+        echo $games;
     }
 
     /**
@@ -62,4 +71,6 @@ class GameController extends Controller
     {
         //
     }
+
+
 }

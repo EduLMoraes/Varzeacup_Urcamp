@@ -18,7 +18,7 @@
 
                 var row = document.createElement('option');
                 row.innerHTML = `
-                    <option value="${games.length}" id="max-games">${games.length}| Novo jogo</option>
+                    <option value="new" id="option">Novo jogo</option>
                 `;
                 select_game.appendChild(row);
 
@@ -27,7 +27,7 @@
                     var row = document.createElement('option');
 
                     row.innerHTML = `
-                        <option value="${game.id}">${game.id}| ${game.desc}</option>
+                        <option value="${game.id}" id="option">${game.id}| ${game.id_home} ${game.home_gols}X${game.visitor_gols} ${game.id_visitor}</option>
                     `;
                     select_game.appendChild(row);
 
@@ -112,10 +112,9 @@
 
                 function selectedGame(){
                     selected = document.getElementById('select-game').value;
-                    var max = document.getElementById('max-games').value;
-                    console.log(max);
+                    console.log(selected);
 
-                    if (selected < max && allComplete){
+                    if (selected !== "Novo jogo" && allComplete){
                         document.getElementById('d-submit').hidden = false;
                         document.getElementById('e-submit').hidden = false;
                         document.getElementById('r-submit').hidden = true;
@@ -142,19 +141,18 @@
         <div class="container">
 
 
-            <div class="navbar-adm">
-                    <a href="/admin">Início</a>
-                    <a href="/admin/times">Times</a>
-                    <a href="/admin/games">Partidas</a>
-                    <a href="/admin/counts">Contas</a>
-                    <a href="/">Sair</a>
-            </div>
+            @include('admin/navbar')
+
 
             <form action="post">
                 <label>Jogo:</label>
-                <select id="select-game">
+                    <select id="select-game">
                 </select>
                 
+                <label>Grupo:</label>
+                    <input type="text" name="" id="group" required>
+                </select>
+
                 <label id="l-home">Casa:</label>
                 <input type="text" name="" id="home" required>
                 

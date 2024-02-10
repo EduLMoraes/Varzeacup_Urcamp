@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TimeController extends Controller
+class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $time = \App\Models\Time::orderBy('points_time', 'desc')->get();
-        echo $time;
+        $team = \App\Models\Team::orderBy('points_team', 'desc')->get();
+        echo $team;
     }
 
     /**

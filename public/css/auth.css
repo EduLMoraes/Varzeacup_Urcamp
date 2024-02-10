@@ -15,7 +15,8 @@ label, .button-submit{
 }
 
 input{
-    background-color: transparent;
+    background-color: black;
+    color: var(--secound-color);
     border-color: var(--secound-color);
     max-width: 250px;
     border-radius: 10px;

@@ -105,13 +105,8 @@
         <div class="container">
 
 
-            <div class="navbar-adm">
-                    <a href="/admin">Início</a>
-                    <a href="/admin/times">Times</a>
-                    <a href="/admin/games">Partidas</a>
-                    <a href="/admin/counts">Contas</a>
-                    <a href="/">Sair</a>
-            </div>
+            @include('admin/navbar')
+
 
             <form action="post">
                 <label for="email" id="l-email">Email:</label>

@@ -30,8 +30,8 @@ route::get('/admin', function(){
     return view('admin/admin');
 });
 
-route::get('/admin/times', function(){
-    return view('admin/form/times');
+route::get('/admin/teams', function(){
+    return view('admin/form/teams');
 });
 
 route::get('/admin/games', function(){
