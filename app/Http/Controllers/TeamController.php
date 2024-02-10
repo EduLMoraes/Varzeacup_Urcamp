@@ -11,7 +11,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $team = \App\Models\Team::orderBy('points_team', 'desc')->get();
+        $team = \App\Models\Team::orderBy('points_team', 'desc')->orderBy('games_team', 'desc')->get();
         echo $team;
     }
 
@@ -20,7 +20,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +28,14 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $team = new \App\Models\Team;
+        $team->points_team = intval($request->victory) * 3 + intval($request->draw);
+        $team->games_team = intval($request->lost) + intval($request->victory) + intval($request->draw);
+        $team->name_team = $request->name;
+        $team->victory_team = intval($request->victory);
+        $team->draw_team = intval($request->draw);
+        $team->lost_team = intval($request->lost);
+        $team->save();
     }
 
     /**
@@ -52,7 +59,14 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        \App\Models\Team::where('id', $id)->update([
+            'points_team' => intval($request->victory) * 3 + intval($request->draw),
+            'games_team' => intval($request->lost) + intval($request->victory) + intval($request->draw),
+            'name_team' => $request->name,
+            'victory_team' => intval($request->victory),
+            'draw_team' => intval($request->draw),
+            'lost_team' => intval($request->lost)
+        ]);
     }
 
     /**
@@ -60,6 +74,6 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        \App\Models\Team::destroy($id);
     }
 }

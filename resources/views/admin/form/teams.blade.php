@@ -166,11 +166,66 @@
                     }
                 }
 
+                
+
                 document.getElementById("team").addEventListener("input", timeComplet);
                 document.getElementById("vit").addEventListener("input", vitComplet);
                 document.getElementById("emp").addEventListener("input", empComplet);
                 document.getElementById("der").addEventListener("input", derComplet);
             });
+
+            function registerTeam(){
+                axios.post('http://localhost:8000/api/teams', {
+                    name: document.getElementById('team').value,
+                    victory: document.getElementById('vit').value,
+                    draw: document.getElementById('emp').value,
+                    lost: document.getElementById('der').value
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                    }
+                });
+
+            }
+
+            async function updateTeam(){
+                let teams = await getTeams();
+                let id;
+
+                teams.forEach(_team => {
+                    if (document.getElementById('team').value === _team.name_team){
+                        id = _team.id;
+                    }
+                });
+
+                axios.put('http://localhost:8000/api/teams/'+id, {
+                    name: document.getElementById('team').value,
+                    victory: document.getElementById('vit').value,
+                    draw: document.getElementById('emp').value,
+                    lost: document.getElementById('der').value
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                    }
+                });
+
+            }
+
+            async function deleteTeam(){
+                let teams = await getTeams();
+                let id;
+
+                teams.forEach(_team => {
+                    if (document.getElementById('team').value === _team.name_team){
+                        id = _team.id;
+                    }
+                });
+
+                axios.delete('http://localhost:8000/api/teams/'+id);
+
+            }
         </script>
     </head>
     <body>
@@ -182,24 +237,25 @@
             @include('admin/navbar')
 
 
-            <form action="post">
-                
+            <form action="{{ route('teams.store') }}" method="POST">
+                @csrf
+
                 <label id="l-team">Time:</label>
-                <input type="text"  id="team" required>
+                <input type="text" name="name" id="team" required>
                 
                 <label id="l-vit">Vitórias:</label>
-                <input type="number"  id="vit" required>
+                <input type="number" name="victory" id="vit" required>
                 
                 <label id="l-emp">Empates:</label>
-                <input type="number"  id="emp" required>
+                <input type="number" name="draw" id="emp" required>
                 
                 <label id="l-der">Derrotas:</label>
-                <input type="number"  id="der" required>
+                <input type="number" name="lost" id="der" required>
 
                 <div class="submits">
-                    <button type="submit" class="button-submit del"  id="d-submit">Deletar</button>
-                    <button type="submit" class="button-submit edit" id="e-submit">Editar</button>
-                    <button type="submit" class="button-submit cad"  id="r-submit">Cadastrar</button>
+                    <button type="button" onclick="deleteTeam()" class="button-submit del"  id="d-submit">Deletar</button>
+                    <button type="button" onclick="updateTeam()" class="button-submit edit" id="e-submit">Editar</button>
+                    <button type="button" onclick="registerTeam()" class="button-submit cad"  id="r-submit">Cadastrar</button>
                 </div>
                 <p id="response"></p>
             </form>

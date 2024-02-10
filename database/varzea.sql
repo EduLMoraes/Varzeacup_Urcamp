@@ -4,8 +4,8 @@ CREATE DATABASE varzea_db;
 \c
 
 CREATE TABLE IF NOT EXISTS users(
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
 
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS teams(
     id BIGSERIAL NOT NULL PRIMARY KEY,
     points_team INT NOT NULL,
     games_team INT NOT NULL,
-    name_team VARCHAR(100) NOT NULL,
+    name_team VARCHAR(100) NOT NULL UNIQUE,
     victory_team INT NOT NULL,
     draw_team INT NOT NULL,
     lost_team INT NOT NULL

@@ -16,4 +16,9 @@ class Game extends Model
     public $date;
     public $hour;
     public $group;
+
+    public $timestamps = false;
+    protected $table = 'games';
+    protected $guarded = ['id'];
+    protected $fillable = ['id_home', 'id_visitor', 'home_gols', 'visitor_gols', 'date', 'group_name', 'hour'];
 }

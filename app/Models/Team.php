@@ -15,5 +15,10 @@ class Team extends Model
     public $victory;
     public $draw;
     public $lost;
+    public $timestamps = false;
+    protected $table = 'teams';
+    protected $guarded = ['id'];
+    protected $fillable = ['points_team', 'games_team','name_team', 'victory_team', 'draw_team', 'lost_team'];
+
 
 }

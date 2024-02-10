@@ -132,6 +132,60 @@
                 document.getElementById("gvis").addEventListener("input", gvisComplet);
                 document.getElementById("select-game").addEventListener("input", selectedGame);
             });
+
+            function registerGame(){
+                axios.post('http://localhost:8000/api/games', {
+                    home: document.getElementById('home').value,
+                    ghome: document.getElementById('ghome').value,
+                    vis: document.getElementById('vis').value,
+                    gvis: document.getElementById('gvis').value
+                    group: document.getElementById('group').value
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                    }
+                });
+
+            }
+
+            // async function updateTeam(){
+            //     let teams = await getTeams();
+            //     let id;
+
+            //     teams.forEach(_team => {
+            //         if (document.getElementById('team').value === _team.name_team){
+            //             id = _team.id;
+            //         }
+            //     });
+
+            //     axios.put('http://localhost:8000/api/teams/'+id, {
+            //         name: document.getElementById('team').value,
+            //         victory: document.getElementById('vit').value,
+            //         draw: document.getElementById('emp').value,
+            //         lost: document.getElementById('der').value
+            //     }, {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //             'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+            //         }
+            //     });
+
+            // }
+
+            // async function deleteTeam(){
+            //     let teams = await getTeams();
+            //     let id;
+
+            //     teams.forEach(_team => {
+            //         if (document.getElementById('team').value === _team.name_team){
+            //             id = _team.id;
+            //         }
+            //     });
+
+            //     axios.delete('http://localhost:8000/api/teams/'+id);
+
+            // }
         </script>
         
     </head>
@@ -147,7 +201,9 @@
             <form action="post">
                 <label>Jogo:</label>
                     <select id="select-game">
-                </select>
+                        <option value="new" id="option">Novo jogo</option>
+                                
+                    </select>
                 
                 <label>Grupo:</label>
                     <input type="text" name="" id="group" required>
