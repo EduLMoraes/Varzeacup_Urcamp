@@ -8,13 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
-    public $id_team;
-    public $points;
-    public $games;
-    public $name;
-    public $victory;
-    public $draw;
-    public $lost;
     public $timestamps = false;
     protected $table = 'teams';
     protected $guarded = ['id'];

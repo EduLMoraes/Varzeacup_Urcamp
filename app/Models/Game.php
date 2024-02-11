@@ -8,15 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     use HasFactory;
-    public $id;
-    public $home;
-    public $visitor;
-    public $ghome;
-    public $gvisitor;
-    public $date_game;
-    public $hour_game;
-    public $group;
-
     public $timestamps = false;
     protected $table = 'games';
     protected $guarded = ['id'];

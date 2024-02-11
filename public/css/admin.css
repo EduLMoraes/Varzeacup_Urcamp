@@ -10,6 +10,15 @@
     color: var(--secound-color);
 }
 
+.disfarce{
+    color: var(--secound-color);
+    font-family: var(--font-family-common);
+    background-color: transparent;
+    border: 0;
+    font-size: large;
+    text-decoration: underline;
+}
+
 a{
     color: var(--secound-color);
 }

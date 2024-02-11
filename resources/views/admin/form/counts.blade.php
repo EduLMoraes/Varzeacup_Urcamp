@@ -7,9 +7,20 @@
         <link rel="stylesheet" href="{{ asset('css/global.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
         <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <script>
-            document.addEventListener("DOMContentLoaded", function() {
+            async function getCounts(){
+                try {
+                    const response = await axios.get('http://localhost:8000/api/users');
+                    return response.data;
+                } catch (error) {
+                    console.error('Erro ao consumir a API:', error);
+                    throw error; 
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", async function() {
             
                 document.getElementById('name').hidden = true;
                 document.getElementById('pass').hidden = true;
@@ -28,8 +39,11 @@
                 var password;
                 var cpassword;
 
+                var users = getCounts();
+
                 function validEmail(email) {
                     var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
                     return re.test(email);
                 }
 
@@ -68,7 +82,7 @@
                 function passComplet() {
                     pass = document.getElementById('pass').value;
 
-                    if (pass.length >= 6){
+                    if (pass.length >= 6 ){
                         document.getElementById('cpass').hidden = false;
                         document.getElementById('l-cpass').hidden = false;
                     }else{
@@ -96,6 +110,75 @@
                 document.getElementById("pass").addEventListener("input", passComplet);
                 document.getElementById("cpass").addEventListener("input", cpassComplet);
             });
+
+            function registerUser(){
+                axios.post('http://localhost:8000/api/users', {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    password: document.getElementById('password').value,
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                    }
+                }).then(() =>{
+                    alert("Registrado com sucesso!");
+                });
+
+            }
+
+            async function updateUser(){
+                let selected = document.getElementById('select-game').value;
+                let games = await getGames();
+                let id;
+
+                if (selected != "new"){
+                    games.forEach(_game => {
+                        if (selected == _game.id){
+                            id = _game.id;
+                        }
+                    });
+    
+                    axios.put('http://localhost:8000/api/users/'+id, {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value,
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                        }
+                    }).then(() => {
+                        alert("Editado com sucesso!");
+                    });
+                }else{
+                    alert("Selecione um jogo existente para editar");
+                }
+
+            }
+
+            async function deleteUser(){
+                let selected = document.getElementById('select-game').value;
+                let games = await getGames();
+                let id;
+
+                if (selected == "new"){
+                    alert("Selecione um jogo existente para excluir");
+                    return 0;
+                }
+                
+                games.forEach(games => {
+                    if (selected == games.id){
+                        id = games.id;
+                    }
+                });
+
+                axios.delete('http://localhost:8000/api/users/'+id).then(() => {
+                    alert("Deletado com sucesso!");
+                });
+                
+                location.reload();
+            }
         </script>
 
     </head>
@@ -108,7 +191,8 @@
             @include('admin/navbar')
 
 
-            <form action="post">
+            <form action="post" class="form">
+                @csrf
                 <label for="email" id="l-email">Email:</label>
                 <input type="email" name="" id="email" required>
 

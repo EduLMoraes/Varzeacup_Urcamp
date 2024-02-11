@@ -245,7 +245,7 @@
             @include('admin/navbar')
 
 
-            <form action="post">
+            <form action="post" class="form">
                 @csrf
 
 

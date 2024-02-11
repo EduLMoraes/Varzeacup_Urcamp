@@ -4,10 +4,13 @@ CREATE DATABASE varzea_db;
 \c
 
 CREATE TABLE IF NOT EXISTS users(
-    username VARCHAR(50) NOT NULL UNIQUE,
+    id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
+
+INSERT INTO users(name, email, password) VALUES ('admin', 'admin@example.com', '$2y$10$v2Y9D0iWZ7HKVnnC61sH4eAn23x8n.YdcoDJXwYOO0hqdcxfOLtvC');
 
 CREATE TABLE IF NOT EXISTS teams(
     id BIGSERIAL NOT NULL PRIMARY KEY,

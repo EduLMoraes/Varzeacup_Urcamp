@@ -13,7 +13,7 @@
 
         <div class="container">
             @include('admin/navbar')
-
+            
             @include('template/cup')
 
         </div>

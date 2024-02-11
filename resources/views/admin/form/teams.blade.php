@@ -185,6 +185,8 @@
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
                     }
+                }).then(() =>{
+                    alert("Time registrado com sucesso!");
                 });
 
             }
@@ -209,6 +211,8 @@
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
                     }
+                }).then(() => {
+                    alert("Time atualizado com sucesso!");
                 });
 
             }
@@ -223,7 +227,11 @@
                     }
                 });
 
-                axios.delete('http://localhost:8000/api/teams/'+id);
+                axios.delete('http://localhost:8000/api/teams/'+id)
+                    .then(()=>{
+                        alert("Time deletado com sucesso!");
+                        location.reload();
+                    });
 
             }
         </script>
@@ -237,7 +245,7 @@
             @include('admin/navbar')
 
 
-            <form action="{{ route('teams.store') }}" method="POST">
+            <form action="{{ route('teams.store') }}" method="POST" class="form">
                 @csrf
 
                 <label id="l-team">Time:</label>
