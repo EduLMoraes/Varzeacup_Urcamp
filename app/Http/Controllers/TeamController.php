@@ -67,6 +67,8 @@ class TeamController extends Controller
             'draw_team' => intval($request->draw),
             'lost_team' => intval($request->lost)
         ]);
+
+        response()->json(['message' => 'team updated with sucess'], 200);
     }
 
     /**

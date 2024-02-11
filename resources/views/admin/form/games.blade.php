@@ -10,36 +10,33 @@
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         <script>
-            axios.get('http://localhost:8000/api/games')
-            .then(function (response) {
+            async function getGames(){
+                try {
+                    const response = await axios.get('http://localhost:8000/api/games');
+                    return response.data;
+                } catch (error) {
+                    console.error('Erro ao consumir a API:', error);
+                    throw error; // Lançar o erro novamente para lidar com ele fora desta função, se necessário
+                }
+            }
 
-                var games = response.data;
+           
+             document.addEventListener("DOMContentLoaded", async function() {
+            
+                var games = await getGames();
+
                 var select_game = document.getElementById('select-game');
 
-                var row = document.createElement('option');
-                row.innerHTML = `
-                    <option value="new" id="option">Novo jogo</option>
-                `;
-                select_game.appendChild(row);
-
-                console.log(games);
                 games.forEach(function (game) {
                     var row = document.createElement('option');
-
+                    row.value = game.id;
                     row.innerHTML = `
-                        <option value="${game.id}" id="option">${game.id}| ${game.id_home} ${game.home_gols}X${game.visitor_gols} ${game.id_visitor}</option>
+                        ${game.id}| ${game.id_home} ${game.home_gols}X${game.visitor_gols} ${game.id_visitor}
                     `;
                     select_game.appendChild(row);
 
                 });
 
-            })
-            .catch(function (error) {
-                console.error('Erro ao consumir a API:', error);
-            });
-
-            document.addEventListener("DOMContentLoaded", function() {
-            
                 document.getElementById('ghome').hidden = true;
                 document.getElementById('vis').hidden = true;
                 document.getElementById('gvis').hidden = true;
@@ -110,11 +107,38 @@
                     }
                 }
 
-                function selectedGame(){
+                async function selectedGame(){
                     selected = document.getElementById('select-game').value;
-                    console.log(selected);
 
-                    if (selected !== "Novo jogo" && allComplete){
+                    if (selected !== "new"){
+
+                        var game;
+                        for(let i = 0; i <games.length; i++){
+                            if(selected == games[i].id){
+                                game = games[i];
+                            }
+                        };
+
+                        document.getElementById('home').value = game.id_home;
+                        document.getElementById('vis').value = game.id_visitor;
+                        document.getElementById('ghome').value = game.home_gols;
+                        document.getElementById('gvis').value = game.visitor_gols;
+                        document.getElementById('date').value = game.date;
+                        document.getElementById('hour').value = game.hour;
+                        document.getElementById('group').value = game.group_name;
+    
+                        document.getElementById('l-ghome').value = games;
+                        document.getElementById('l-vis').value = games;
+                        document.getElementById('l-gvis').value = games;
+
+                        document.getElementById('ghome').hidden = false;
+                        document.getElementById('vis').hidden = false;
+                        document.getElementById('gvis').hidden = false;
+    
+                        document.getElementById('l-ghome').hidden = false;
+                        document.getElementById('l-vis').hidden = false;
+                        document.getElementById('l-gvis').hidden = false;
+
                         document.getElementById('d-submit').hidden = false;
                         document.getElementById('e-submit').hidden = false;
                         document.getElementById('r-submit').hidden = true;
@@ -136,56 +160,79 @@
             function registerGame(){
                 axios.post('http://localhost:8000/api/games', {
                     home: document.getElementById('home').value,
-                    ghome: document.getElementById('ghome').value,
-                    vis: document.getElementById('vis').value,
-                    gvis: document.getElementById('gvis').value
-                    group: document.getElementById('group').value
+                    visitor: document.getElementById('vis').value,
+                    hgols: document.getElementById('ghome').value,
+                    vgols: document.getElementById('gvis').value,
+                    date: document.getElementById('date').value,
+                    group: document.getElementById('group').value,
+                    hour: document.getElementById('hour').value
                 }, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
                     }
+                }).then(() =>{
+                    alert("Registrado com sucesso!");
                 });
 
             }
 
-            // async function updateTeam(){
-            //     let teams = await getTeams();
-            //     let id;
+            async function updateGame(){
+                let selected = document.getElementById('select-game').value;
+                let games = await getGames();
+                let id;
 
-            //     teams.forEach(_team => {
-            //         if (document.getElementById('team').value === _team.name_team){
-            //             id = _team.id;
-            //         }
-            //     });
+                if (selected != "new"){
+                    games.forEach(_game => {
+                        if (selected == _game.id){
+                            id = _game.id;
+                        }
+                    });
+    
+                    axios.put('http://localhost:8000/api/games/'+id, {
+                        home: document.getElementById('home').value,
+                        visitor: document.getElementById('vis').value,
+                        hgols: document.getElementById('ghome').value,
+                        vgols: document.getElementById('gvis').value,
+                        date: document.getElementById('date').value,
+                        group: document.getElementById('group').value,
+                        hour: document.getElementById('hour').value
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
+                        }
+                    }).then(() => {
+                        alert("Editado com sucesso!");
+                    });
+                }else{
+                    alert("Selecione um jogo existente para editar");
+                }
 
-            //     axios.put('http://localhost:8000/api/teams/'+id, {
-            //         name: document.getElementById('team').value,
-            //         victory: document.getElementById('vit').value,
-            //         draw: document.getElementById('emp').value,
-            //         lost: document.getElementById('der').value
-            //     }, {
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //             'Access-Control-Allow-Origin': '*' // Permitir solicitações de qualquer origem
-            //         }
-            //     });
+            }
 
-            // }
+            async function deleteGame(){
+                let selected = document.getElementById('select-game').value;
+                let games = await getGames();
+                let id;
 
-            // async function deleteTeam(){
-            //     let teams = await getTeams();
-            //     let id;
+                if (selected == "new"){
+                    alert("Selecione um jogo existente para excluir");
+                    return 0;
+                }
+                
+                games.forEach(games => {
+                    if (selected == games.id){
+                        id = games.id;
+                    }
+                });
 
-            //     teams.forEach(_team => {
-            //         if (document.getElementById('team').value === _team.name_team){
-            //             id = _team.id;
-            //         }
-            //     });
-
-            //     axios.delete('http://localhost:8000/api/teams/'+id);
-
-            // }
+                axios.delete('http://localhost:8000/api/games/'+id).then(() => {
+                    alert("Deletado com sucesso!");
+                });
+                
+                location.reload();
+            }
         </script>
         
     </head>
@@ -199,6 +246,9 @@
 
 
             <form action="post">
+                @csrf
+
+
                 <label>Jogo:</label>
                     <select id="select-game">
                         <option value="new" id="option">Novo jogo</option>
@@ -207,6 +257,14 @@
                 
                 <label>Grupo:</label>
                     <input type="text" name="" id="group" required>
+                </select>
+
+                <label>Data:</label>
+                    <input type="date" name="" id="date" required>
+                </select>
+
+                <label>Horário:</label>
+                    <input type="time" name="" id="hour" required>
                 </select>
 
                 <label id="l-home">Casa:</label>
@@ -222,9 +280,9 @@
                 <input type="number" name="" id="gvis" required>
 
                 <div class="submits">
-                    <button type="submit" class="button-submit del" id="d-submit">Deletar</button>
-                    <button type="submit" class="button-submit edit" id="e-submit">Editar</button>
-                    <button type="submit" class="button-submit cad" id="r-submit">Cadastrar</button>
+                    <button type="button" onclick="deleteGame()" class="button-submit del" id="d-submit">Deletar</button>
+                    <button type="button" onclick="updateGame()" class="button-submit edit" id="e-submit">Editar</button>
+                    <button type="button" onclick="registerGame()" class="button-submit cad" id="r-submit">Cadastrar</button>
                 </div>
                 <p id="response"></p>
             </form>

@@ -11,10 +11,10 @@ class Game extends Model
     public $id;
     public $home;
     public $visitor;
-    public $home_gols;
-    public $visitor_gols;
-    public $date;
-    public $hour;
+    public $ghome;
+    public $gvisitor;
+    public $date_game;
+    public $hour_game;
     public $group;
 
     public $timestamps = false;

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     use HasFactory;
-    public $id;
+    public $id_team;
     public $points;
     public $games;
     public $name;
