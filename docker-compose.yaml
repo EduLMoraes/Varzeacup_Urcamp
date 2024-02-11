@@ -1,0 +1,29 @@
+version: '3.0'
+services:
+  app-db:
+    build:
+      context: .
+      dockerfile: Dockerfile.pgsql
+    volumes:
+      - app-data:/var/lib/pgsql
+    environment:
+      - DB_DATABASE=varzea_db
+      - DB_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: DataBase-pgsql
+    ports:
+      - "5432:5432"
+
+  app-php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    image: nginx:latest
+    ports:
+      - "8000:8000"
+    container_name: App-php
+    depends_on:
+      - app-db
+
+volumes:
+  app-data:

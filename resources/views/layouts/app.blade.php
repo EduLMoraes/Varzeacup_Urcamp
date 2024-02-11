@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
     <!-- Scripts -->
-    @vite(['resources/js/app.js'])
 </head>
 <body>
     <div id="app">

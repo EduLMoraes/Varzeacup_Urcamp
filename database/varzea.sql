@@ -1,7 +1,7 @@
 -- Active: 1703730527497@@127.0.0.1@5432@varzea_db
 CREATE DATABASE varzea_db;
 
-\c
+\c varzea_db;
 
 CREATE TABLE IF NOT EXISTS users(
     id SERIAL NOT NULL PRIMARY KEY,
