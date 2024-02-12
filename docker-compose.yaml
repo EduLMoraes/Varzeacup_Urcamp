@@ -11,8 +11,6 @@ services:
       - DB_USERNAME=postgres
       - POSTGRES_PASSWORD=postgres
     container_name: DataBase-pgsql
-    ports:
-      - "5432:5432"
 
   app-php:
     build:

@@ -1,7 +1,12 @@
 # Teste de Varzeacup para vaga na Urcamp
 
 # Como rodar o projeto
+Primeiro é necessário que tenha instalado em sua máquina o *Docker* e o *docker-compose*
 
+Se já possuir ambos, rode este comando:
+```bash
+docker-compose up --build
+```
 
 ### Requisitos:
 ● Ter telas para listagem, cadastro, edição e exclusão de times e partidas. Deve conter regras de validação para campos que forem requeridos. 
