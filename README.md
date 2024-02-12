@@ -24,6 +24,7 @@ docker-compose up --build
 ● Os dados do campeonato devem ser armazenados em um banco relacional como o MySQL e/ou PostgreSQL.
 
 
+
 ### Diferenciais 
 
 
