@@ -17,7 +17,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.php
-    image: nginx:latest
     ports:
       - "8000:8000"
     container_name: App-php

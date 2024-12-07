@@ -17,16 +17,15 @@ docker-compose up --build
 
 ● A partida deve constar a data e hora que ocorrerá e qual é a rodada da partida.
 
+● Os campeonatos são anuais. A aplicação deve manter todos os campeonatos com suas
+partidas salvos para futura recuperação dessas informações se assim for necessário. O
+campeonato deve ter jogos de ida e volta.
+
 ● O layout da aplicação deve ser feito com HTML e CSS. Não deve ser utilizado frameworks de css (ex.: bootstrap) e/ou pré-processadores como o sass. De preferência por um layout minimalista. 
 
-● O backend da aplicação deve ser desenvolvido com PHP v7.4+, evite usar framework, se mesmo assim quiser, de preferência pelo Laravel e justifique o porquê decidiu utilizar um. 
+● A aplicação deve ser desenvolvida no PHP 8.3 com o framework Laravel 11.
 
 ● Os dados do campeonato devem ser armazenados em um banco relacional como o MySQL e/ou PostgreSQL.
-
-
-
-### Diferenciais 
-
 
 ● Adicionar tela para listagem, criação, edição e exclusão de usuários.
 
@@ -34,6 +33,12 @@ docker-compose up --build
 
 ● A tela de classificação é a única que deve ser sempre pública (para logados e não logados). A mesma deve ter um link na tela de login para usuários não logados terem acesso. 
 
+
+
+### Diferenciais 
+
 ● Desenvolver a aplicação separando o backend como sendo uma API utilizando o framework Laravel. E no frontend utilizar React/Vue e consumir a API com alguma library (ex.: axios)
 
+● Criar uma API (backend) da aplicação.
+● Criar frontend utilizando o Vue/React consumindo a API (backend) criado.0
 
