@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Http;
 
 class GameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $games = Game::orderBy('date', 'desc')->get();
@@ -25,17 +22,11 @@ class GameController extends Controller
         echo $games;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $home = \App\Models\Team::where('name_team', $request->home)->first();
@@ -52,10 +43,8 @@ class GameController extends Controller
             $visitor->draw_team += 1;
         }
 
-        $home->points_team = $home->victory_team * 3 + $home->draw_team;
         $home->games_team++;
 
-        $visitor->points_team = $visitor->victory_team * 3 + $visitor->draw_team;
         $visitor->games_team++;
 
         $visitor->save();
@@ -75,25 +64,16 @@ class GameController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Game $game)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Game $game)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $home = \App\Models\Team::where('name_team', $request->home)->first();
@@ -112,9 +92,6 @@ class GameController extends Controller
         response()->json(['message' => 'team updated with sucess'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
          Game::destroy($id);
